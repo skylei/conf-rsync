@@ -17,7 +17,7 @@
 #### 编译方式
 -------------
  - 取最新代码，然后在根目录执行： 
- >mvn clean && mvn dependency:copy-dependencies && mvn install
+  mvn clean && mvn dependency:copy-dependencies && mvn install
  - 或者直接执行根目录下面的 build.bat 或者 build.sh
  - 编译完成之后在 target 目录下面会生成 conf-sync.zip
  

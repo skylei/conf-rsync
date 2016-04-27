@@ -1,7 +1,3 @@
-#### 代码地址
--------------
-> https://svn.yy.com/repos/src/kuaikuai/server/trunk/conf-sync
-
 #### 主要特性
 -------------
 - 采用server/client模式实现多台linux服务器之间配置文件实时同步
@@ -47,7 +43,7 @@ hosts deny = *
 read only = yes
 ```
 
-		其中, module1 和 module2 表示要监控并同步的节点，conf-sync server 启动后会根据这个配置文件来定位每个节点的文件根目录，并监控其中所有文件及目录变化，一旦有更新会通知zookeeper。
+	其中, module1 和 module2 表示要监控并同步的节点，conf-sync server 启动后会根据这个配置文件来定位每个节点的文件根目录，并监控其中所有文件及目录变化，一旦有更新会通知zookeeper。
 		
 	conf-sync client 启动后会从zookeeper获得server的IP，以及所有节点及节点的根目录，并根据启动参数来选择本地要同步哪几个节点的文件到本地。
 		

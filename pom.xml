@@ -1,0 +1,107 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.duowan</groupId>
+	<artifactId>conf-sync</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>conf-sync</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.9.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+			<version>3.4.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.adyliu</groupId>
+			<artifactId>zkclient</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.nikhaldimann</groupId>
+			<artifactId>inieditor</artifactId>
+			<version>r5</version>
+		</dependency>
+		<dependency>
+			<groupId>de.tototec</groupId>
+			<artifactId>de.tototec.cmdoption</artifactId>
+			<version>0.4.2</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>compiler</id>
+						<phase>install</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target name="copyFile">
+								<!-- -->
+								<echo message="begin copy file" />
+								<mkdir dir="${project.build.directory}/conf-sync" />
+								<mkdir dir="${project.build.directory}/conf-sync/lib" />
+								<copy todir="${project.build.directory}/conf-sync/lib/"
+									overwrite="true">
+									<fileset dir="${project.build.directory}/dependency/"
+										includes="**/*" />
+								</copy>
+								<copy todir="${project.build.directory}/conf-sync/lib/"
+									overwrite="true">
+									<fileset
+										file="${project.build.directory}/${project.build.finalName}.jar">
+									</fileset>
+								</copy>
+								<copy todir="${project.build.directory}/conf-sync/"
+									overwrite="true">
+									<fileset
+										file="${project.build.directory}/classes/log4j.properties">
+									</fileset>
+									<fileset
+										file="${basedir}/README.md">
+									</fileset>
+									<fileset dir="${project.build.directory}/classes/"
+										includes="*.*" />
+								</copy>
+								<zip basedir="${project.build.directory}/conf-sync" destfile="${project.build.directory}/conf-sync.zip" excludes=".svn/**" />
+							</target>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

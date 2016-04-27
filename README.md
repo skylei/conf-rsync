@@ -1,3 +1,7 @@
+#### 代码地址
+-------------
+> https://svn.yy.com/repos/src/kuaikuai/server/trunk/conf-sync
+
 #### 主要特性
 -------------
 - 采用server/client模式实现多台linux服务器之间配置文件实时同步
@@ -24,8 +28,8 @@
 #### 部署方式
 -------------
  将conf-sync.zip上传到服务器，并解压到conf-sync，例如: /usr/local/conf-sync
- ##### server 模式:
- ###### /etc/rsyncd.conf 配置:
+##### server 模式:
+###### /etc/rsyncd.conf 配置:
 
 ```
 [module1]
@@ -51,12 +55,12 @@ read only = yes
 确认 rsync 服务启动成功后，进入 /usr/local/conf-sync 目录,执行下面命令以server模式启动conf-sync服务：
  > sudo sh server.sh  -z 10.25.65.80:2181,10.25.65.81:2181 -c /etc/rsyncd.conf -p module1,module2
  
- ##### client 模式:
+##### client 模式:
  		必须先安装 rsync（安装即可，无需启动后台服务）
  进入 /usr/local/conf-sync 目录,执行下面命令以client模式启动conf-sync服务：
  > sudo sh client.sh  -z 10.25.65.80:2181,10.25.65.81:2181  -p module2
  
- ##### 停止服务:
+##### 停止服务:
  进入 /usr/local/conf-sync 目录,执行:
  > sudo sh stop.sh
  
